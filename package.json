@@ -1,0 +1,32 @@
+{
+    "name": "cmd-script-utils",
+    "version": "0.1.0",
+    "license": "MIT",
+
+    "description": "Commonly used utility functions for writing command-line scripts",
+
+    "keywords": [ "JavaScript", "shell", "script", "utility", "command-line", "CLI" ],
+
+    "author": {
+        "name": "gcnew"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gcnew/cli-script-utils.git"
+    },
+
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+
+    "devDependencies": {
+        "@types/node": ""
+    },
+
+    "scripts": {
+        "strip-types":         "node tools/stripTS.js index.ts > lib/index.js",
+        "inline-decl-exports": "node tools/beautify_d_ts.js lib/index.d.ts > lib/index.d.ts_new && mv lib/index.d.ts_new lib/index.d.ts",
+
+        "build-lib":           "tsc && npm run strip-types && npm run inline-decl-exports"
+    }
+}

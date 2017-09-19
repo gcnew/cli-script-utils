@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "lib": [ "es5" ],
+
+        "sourceMap": false,
+        "declaration": true,
+
+        "forceConsistentCasingInFileNames": true,
+
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "noImplicitThis": true,
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "strictNullChecks": true,
+        "allowUnusedLabels": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowUnreachableCode": false,
+
+        "outDir": "lib"
+    },
+
+    "files": [
+        "index.ts"
+    ]
+}
