@@ -84,13 +84,13 @@ function exists(path: string) {
     return fs.existsSync(path);
 }
 
+function readFile(path: string) {
+    return fs.readFileSync(path, 'utf8');
+}
+
 function writeFile(path: string, content: string) {
     mkdirr(Path.dirname(path));
     fs.writeFileSync(path, content);
-}
-
-function readFile(path: string) {
-    return fs.readFileSync(path, 'utf8');
 }
 
 function unixPath(path: string) {
