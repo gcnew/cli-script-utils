@@ -1,5 +1,5 @@
 {
-    "name": "cmd-script-utils",
+    "name": "cli-script-utils",
     "version": "0.1.0",
     "license": "MIT",
 
@@ -15,6 +15,10 @@
         "type": "git",
         "url": "https://github.com/gcnew/cli-script-utils.git"
     },
+
+    "files": [
+        "lib"
+    ],
 
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",

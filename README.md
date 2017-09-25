@@ -35,7 +35,7 @@ An alias for `fs.existsSync`.
 Synchronously reads the file at the specified path and returns its content as a UTF-8 encoded string.
 
 #### `writeFile(path: string, content: string): void`
-Synchronously writes the file at the specified path with the provided content.
+Synchronously writes a file at the specified path with the provided content.
 
 #### `unixPath(path: string): string`
 Given a path that contains forward and/or backward slashes, returns a path with forward slashes only.
