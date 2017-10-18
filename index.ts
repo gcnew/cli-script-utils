@@ -133,8 +133,14 @@ function exit(code: number): never {
     return process.exit(code);
 }
 
-function fail(msg?: string): never {
-    throw new Error(msg || 'Snap! I failed!');
+function fail(msg?: string, marker?: Function): never {
+    const error = new Error(msg || 'Snap! I failed!');
+
+    if (Error.captureStackTrace) {
+        Error.captureStackTrace(error, marker || fail);
+    }
+
+    throw error;
 }
 
 function die(msg: string): never {

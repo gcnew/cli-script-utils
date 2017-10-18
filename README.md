@@ -67,8 +67,9 @@ In case of an error, returns the default value `def`.
 #### `exit(code: number): never`
 An alias for `process.exit`.
 
-#### `fail(msg?: string): never`
-An expression version of `throw`. Throws an `Error` with the provided message.
+#### `fail(msg?: string, marker?: Function): never`
+An expression version of `throw`. Throws an `Error` with the provided message.  
+NOTE: If a `marker` function is provided and the host environment allows stack trace manipulation, all frames following and including `marker` will be omitted.
 
 #### `die(msg: string): never`
 Akin to `fail` but calls `process.exit(1)` instead of throwing an exception. The message is logged on `stderr`.
