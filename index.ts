@@ -6,7 +6,7 @@ export {
     glob, compileGlobPattern, readdirr, rmrf, mkdirr,
     exists, readFile, writeFile, unixPath,
 
-    getFlagOption, getValueOption, match, trai, fail, die
+    getFlagOption, getValueOption, match, trai, exit, fail, die
 }
 
 function glob(dir: string, pattern: string) {
@@ -129,11 +129,15 @@ function trai<T>(f: () => T, def: T) {
     }
 }
 
-function fail(msg?: string) {
+function exit(code: number): never {
+    return process.exit(code);
+}
+
+function fail(msg?: string): never {
     throw new Error(msg || 'Snap! I failed!');
 }
 
-function die(msg: string) {
+function die(msg: string): never {
     console.error(msg);
-    process.exit(1);
+    return process.exit(1);
 }
