@@ -64,10 +64,13 @@ Executes the RegExp `rx` on `text` and returns the results of all matches.
 An expression varion of `try`. Executes the provided thunk `f` and returns its result.
 In case of an error, returns the default value `def`.
 
-#### `fail(msg?: string): void`
+#### `exit(code: number): never`
+An alias for `process.exit`.
+
+#### `fail(msg?: string): never`
 An expression version of `throw`. Throws an `Error` with the provided message.
 
-#### `die(msg: string): void`
+#### `die(msg: string): never`
 Akin to `fail` but calls `process.exit(1)` instead of throwing an exception. The message is logged on `stderr`.
 
 
