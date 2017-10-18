@@ -9,7 +9,7 @@ export declare function readFile(path: string): string;
 export declare function writeFile(path: string, content: string): void;
 export declare function unixPath(path: string): string;
 export declare function getFlagOption(option: string): boolean;
-export declare function getValueOption(option: string): string;
+export declare function getValueOption(option: string): string | undefined;
 export declare function match(text: string, rx: RegExp): string[][];
 export declare function trai<T>(f: () => T, def: T): T;
 export declare function fail(msg?: string): void;
