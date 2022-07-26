@@ -1,6 +1,7 @@
 
 export declare function glob(dir: string, pattern: string): string[];
 export declare function compileGlobPattern(pattern: string): RegExp;
+export declare function compileGlobPredicate(globs: string[]): (x: string) => boolean;
 export declare function readdirr(path: string): string[];
 export declare function rmrf(path: string): void;
 export declare function mkdirr(path: string): void;

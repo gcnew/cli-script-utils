@@ -14,6 +14,21 @@ A simple glob implementation.
 Compiles a given glob pattern to a RegExp.  
 **WARNING**: Not a standards compliant implementation.
 
+#### `compileGlobPredicate(globs: string[]): (x: string) => boolean`
+Compiles a the given glob patterns to a predicate function. Globs are devided into positive
+and neative ones (i.e. starting with `!`). The compiled predicate returns true if its
+argument matches _any_ of the positive globs and _none_ of the negative ones.
+
+```js
+const predicate = compileGlobPredicate([
+    '**/*.js',
+    '!built/**/*'
+]);
+
+predicate('hello.js'); // true
+predicate('built/hello.js'); // false
+```
+
 #### `readdirr(path: string): string[]`
 A recursive synchronous version of `readdir`.
 Useful for reading the contents of a directory which may contain other nested directories.
@@ -53,8 +68,9 @@ getFlagOption('--version'); // false
 Retrieves the value provided to `option` as string.
 
 ```js
-// argv: [ 'node', 'myscript.js', '--path=built/main.js' ]
+// argv: [ 'node', 'myscript.js', '--path=built/main.js', '--positioned', 'next-pos' ]
 getValueOption('--path'); // 'built/main.js'
+getValueOption('--positioned'); // 'next-pos'
 ```
 
 #### `match(text: string, rx: RegExp): string[][]`

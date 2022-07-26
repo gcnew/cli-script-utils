@@ -3,8 +3,8 @@ import * as fs from 'fs'
 import * as Path from 'path'
 
 export {
-    glob, compileGlobPattern, readdirr, rmrf, mkdirr,
-    exists, readFile, writeFile, unixPath,
+    glob, compileGlobPattern, compileGlobPredicate,
+    readdirr, rmrf, mkdirr, exists, readFile, writeFile, unixPath,
 
     getFlagOption, getValueOption, match, trai, exit, fail, die
 }
@@ -29,6 +29,19 @@ function compileGlobPattern(pattern: string) {
         );
 
     return new RegExp('^' + compiled + '$');
+}
+
+function compileGlobPredicate(globs: string[]) {
+    const positive = globs
+        .filter(x => !/^!/.test(x))
+        .map(compileGlobPattern);
+
+    const negative = globs
+        .filter(x => /^!/.test(x))
+        .map(x => compileGlobPattern(x.slice(1)));
+
+    return (x: string) => positive.some(rx => rx.test(x)
+                      && !negative.some(rx => rx.test(x)));
 }
 
 function readdirr(path: string) {
@@ -102,10 +115,16 @@ function getFlagOption(option: string) {
 }
 
 function getValueOption(option: string) {
-    const rx = new RegExp(`^${ option }=(.+)$`);
+    const rx = new RegExp(`^${ option }(=(.+))?$`);
 
-    return process.argv.reduce(
-        (res, arg) => (rx.exec(arg) || [])[1] || res,
+    return process.argv.reduce((res: string|undefined, arg, idx, arr) => {
+            const matched = rx.exec(arg);
+
+            return matched
+                ? matched[1] && matched[2] || arr[idx + 1]
+                : res;
+        },
+
         undefined
     );
 }
