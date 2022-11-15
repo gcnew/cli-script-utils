@@ -16,4 +16,5 @@ export declare function trai<T>(f: () => T, def: T): T;
 export declare function exit(code: number): never;
 export declare function fail(msg?: string, marker?: Function): never;
 export declare function die(msg: string): never;
+export declare function fetch(url: string): Promise<string>;
 

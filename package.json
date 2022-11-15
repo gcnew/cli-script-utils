@@ -1,6 +1,6 @@
 {
     "name": "cli-script-utils",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "license": "MIT",
 
     "description": "Commonly used utility functions for writing command-line scripts",

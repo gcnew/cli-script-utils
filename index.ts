@@ -1,10 +1,13 @@
 
 import * as fs from 'fs'
 import * as Path from 'path'
+import * as https from 'https'
 
 export {
     glob, compileGlobPattern, compileGlobPredicate,
     readdirr, rmrf, mkdirr, exists, readFile, writeFile, unixPath,
+
+    fetch,
 
     getFlagOption, getValueOption, match, trai, exit, fail, die
 }
@@ -165,4 +168,21 @@ function fail(msg?: string, marker?: Function): never {
 function die(msg: string): never {
     console.error(msg);
     return process.exit(1);
+}
+
+function fetch(url: string) {
+    return new Promise<string>((resolve, reject) => {
+        const rq = https.get(url, res => {
+            if (res.statusCode !== 200) {
+                return reject(`Cannot fetch URL:${url}`)
+            }
+
+            const body: Buffer[] = [];
+            res.on('data', chunk => body.push(chunk));
+            res.on('end', () => resolve(Buffer.concat(body).toString('utf8')));
+        });
+
+        rq.on('error', err => reject(err));
+        rq.end();
+    });
 }
