@@ -56,7 +56,7 @@ Synchronously writes a file at the specified path with the provided content.
 Given a path that contains forward and/or backward slashes, returns a path with forward slashes only.
 
 #### `fetch(url: string): Promise<string>`
-Makes an HTTPS GET request, returns the content of the response. Currently only GET is supported.
+Makes an HTTPS GET request and returns the content of the response. Redirects are followed. Currently only GET is supported.
 
 #### `getFlagOption(option: string): boolean`
 Checks `argv` and returns whether such an option has been provided.

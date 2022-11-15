@@ -173,8 +173,14 @@ function die(msg: string): never {
 function fetch(url: string) {
     return new Promise<string>((resolve, reject) => {
         const rq = https.get(url, res => {
+            // follow redirects
+            if ([301, 302, 303, 307, 308].includes(res.statusCode!)) {
+                fetch(res.headers.location!).then(resolve, reject);
+                return;
+            }
+
             if (res.statusCode !== 200) {
-                return reject(`Cannot fetch URL:${url}`)
+                return reject(`Cannot fetch URL:${url}, statusCode:${res.statusCode}`)
             }
 
             const body: Buffer[] = [];

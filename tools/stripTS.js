@@ -6,6 +6,10 @@ function stripTypes(source) {
     );
 }
 
+function stripNotNullBangs(source) {
+    return source.replace(/(?<!'.*)(\w+)!(?=\W)/g, '$1');
+}
+
 function importToRequire(source) {
     return source.replace(
         /import \* as (\w+) from ('[^']+');?/g,
@@ -33,6 +37,7 @@ const source = fs.readFileSync(process.argv[2], 'utf8');
 
 const compiled = [
         stripTypes,
+        stripNotNullBangs,
         importToRequire,
         exportToModuleExports
     ]
